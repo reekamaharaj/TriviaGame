@@ -15,3 +15,5 @@ Option One: Basic Quiz (Timed Form)
 * Don't let the player pick more than one answer per question.
 
 * Don't forget to include a countdown timer.
+
+Image from: https://pixabay.com/illustrations/dna-genetic-material-helix-proteins-3539309/
