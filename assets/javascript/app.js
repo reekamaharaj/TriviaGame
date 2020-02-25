@@ -42,3 +42,188 @@ TODO Counter should be displayed so the player knows how much time they have lef
 //function for what happens when the timer runs out
 //function to update the timer on the page
 
+let triviaQuestion = [
+    {
+        question: 'How many bones does a cat have?',
+        answer:{
+            a: 120, 
+            b: 192, 
+            c: 230, 
+            d: 186},
+            correct: function(){
+                return this.answer.c;
+            } 
+    },
+
+    {
+        question: 'What breed of cat is shown in the Disney Movie "Lady and the Tramp"?',
+        answer:{
+            a: 'American Short Hair', 
+            b: 'Tabby', 
+            c: 'Siamese', 
+            d: 'Persian'},
+        correct: 'c'
+    },
+
+
+    {
+        question:'How many rows of whiskers does a cat have?',
+        answer:{
+            a: 4,
+            b: 7,
+            c: 2,
+            d: 6},
+        correct: 'a'
+    },
+
+    {
+        question: 'How many teeth does an adult cat have?',
+        answer:{
+            a: 42,
+            b: 30,
+            c: 36,
+            d: 22},
+        correct: 'b'
+    },
+
+    {
+        question: 'The cat breed "Spotted Mist" is now known as what?',
+        anwer: {    
+            a: 'Canadian Mist',
+            b: 'Belgian Mist',
+            c: 'Australian Mist',
+            d: 'American Mist'},
+        correct: 'c'
+    },
+
+    {
+        question: 'Which of these cat breeds has long hair?',
+        answer:{
+            a: 'Ocicat',
+            b: 'Havana Brown',
+            c: 'Russian blue',
+            d: 'Himalayan'},
+        correct: 'd'
+    },
+    
+    {
+        question: 'Which of these breeds is caused by a genetic mutation?',
+        answer: {
+            a: 'Siberian',
+            b: 'Manx',
+            c: 'Munchkin',
+            d: 'Napoleon'},
+        correct: 'c'
+    },
+
+    {
+        question: 'Which of these breeds is native to Kenya?',
+        answer: {
+            a: 'Sokoke',
+            b: 'Nebelung',
+            c: 'Tiffany',
+            d: 'Snowshoe'},
+        correct: 'a'
+    },
+
+    {
+        question: 'Which of these cats has a "ticked coat"?',
+        answer: {
+            a: 'Manx',
+            b: 'La Perm',
+            c: 'Persian',
+            d: 'Abyssinian'},
+        correct: 'd'
+    },
+
+    {
+        question: 'Which breed of cat is the largest?',
+        answer: {
+            a: 'Savannah',
+            b: 'Maine Coon',
+            c: 'Ragdoll',
+            d: 'Siberian'},
+        correct: 'b'
+    },
+    
+    {
+        question: 'When does a kitten open its eyes?',
+        answer: {
+            a: '5 weeks',
+            b: 'Two months',
+            c: '1-3 weeks',
+            d: 'At birth'},
+        correct: 'c'
+    },
+    
+    {
+        question: 'When does a kitten show interest in solid food?',
+        answer: {
+            a: 'Two months',
+            b: 'At birth',
+            c: '2 weeks',
+            d: '6 weeks'},
+        correct: 'd'
+    },
+
+    {
+        question: 'What best describes a feral cat?',
+        answer:{
+            a: 'A domesticated cat that has returned to the wild',
+            b: 'A barn cat',
+            c: 'Cats that roam only at night',
+            d: 'Cats that roam freely'},
+        correct: 'a'
+    },
+
+    {
+        question: 'What is the name of the cat that was left £9m by his reclusive British owner in 1988?',
+        answer: {
+            a: 'Blackie',
+            b: 'Paws',
+            c: 'Tubbs',
+            d: 'Marmalade'},
+        correct: 'a'
+    },
+
+    {
+        question: 'On average, cats spend how much time every day sleeping?',
+        answer: {
+            a: '8 Hours',
+            b: '12 Hours',
+            c: '4 Hours',
+            d: '16 Hours'},
+        correct: 'd'
+    }
+];
+
+
+$('document').ready(function(){
+    pageLoad();
+    $('#start').click(start);
+    console.log(triviaQuestion[0].question);
+    console.log(triviaQuestion[0].answer);
+    console.log(triviaQuestion[0].correct());
+});
+
+
+function start(){
+    //create done button
+    //populate all the questions and answers
+    //answer options need to be radio buttons
+    //start timer
+   
+
+
+}
+
+//show questions
+function questions(){
+    for (var i=0; i < questions.length; i++){
+       
+    }
+}
+
+function pageLoad(){
+    
+}

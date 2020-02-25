@@ -8,28 +8,35 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script type="text/javascript" src="assets/javascript/app.js"></script>
 
-    <title>Trivia Game</title>
+    <title>Cat Trivia Game</title>
 </head>
 
 <body>
 
-    <div class="flex bg-blue-700 h-screen px-4 items-center justify-center">
-        <div class="flex flex-col bg-blue-200 w-full rounded shadow-lg max-w-4xl">
+    <div class="flex bg-orange-700 h-screen px-4 items-center justify-center">
+        <div class="flex flex-col bg-orange-200 w-full rounded shadow-lg max-w-4xl">
 
-            <div class="w-full h-64 bg-top bg-cover rounded" style="background-image: url(assets/images/dna-3539309_1920.jpg)"></div>
+            <div class="w-full h-64 bg-top bg-cover rounded" style="background-image: url(assets/images/emandyu.jpg)"></div>
 
             <div class="flex w-full md:flex-row justify-center">
-                <div class="flex flex-col p-4 font-normal text-blue-800">
-                    <h1 class="mb-4 text-4xl font-bold text-blue-800">Science Trivia</h1>
+                <div class="flex flex-col p-4 font-normal text-orange-800">
+                    <h1 class="mb-4 text-4xl font-bold text-orange-800">Cat Trivia</h1>
                 </div>
             </div>
 
+            
+            <button class="w-full bg-orange-500 hover:bg-orange-400 text-white font-bold py-2 px-4 border-b-4 border-orange-700 hover:border-orange-500 rounded" id="start"> Start </button> 
+
             <div class="flex flex-col w-full md:flex-row">
-                <div class="flex flex-col px-6 py-5 m-6 font-normal text-blue-800">
-                    <h1 class="my-4 text-3xl font-bold text-blue-800">Question</h1>
-                    <p>Answers</p>
+                <div class="flex flex-col px-6 py-5 m-6 font-normal text-orange-800">
+                    <h1 class="my-4 text-3xl font-bold text-orange-800" id="question"></h1>
+                    <p id="answer"></p>
                 </div>
             </div>
+
+            <div class="flex justify-center mb-5">
+                <button class="max-w-xs bg-orange-500 hover:bg-orange-400 text-white font-bold py-2 px-4 border-b-4 border-orange-700 hover:border-orange-500 rounded" id="done"> Done </button>
+            </div> 
 
         </div>
     </div>
