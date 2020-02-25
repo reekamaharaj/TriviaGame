@@ -50,7 +50,7 @@ let triviaQuestion = [
             b: 192, 
             c: 230, 
             d: 186},
-            correct: function(){
+        correct: function(){
                 return this.answer.c;
             } 
     },
@@ -62,7 +62,9 @@ let triviaQuestion = [
             b: 'Tabby', 
             c: 'Siamese', 
             d: 'Persian'},
-        correct: 'c'
+        correct: function(){
+            return this.answer.c;
+        }
     },
 
 
@@ -73,7 +75,9 @@ let triviaQuestion = [
             b: 7,
             c: 2,
             d: 6},
-        correct: 'a'
+        correct: function(){
+            return this.answer.a;
+        }
     },
 
     {
@@ -83,7 +87,9 @@ let triviaQuestion = [
             b: 30,
             c: 36,
             d: 22},
-        correct: 'b'
+        correct: function(){
+            return this.answer.b;
+        }
     },
 
     {
@@ -93,7 +99,9 @@ let triviaQuestion = [
             b: 'Belgian Mist',
             c: 'Australian Mist',
             d: 'American Mist'},
-        correct: 'c'
+        correct: function(){
+            return this.answer.c;
+        }
     },
 
     {
@@ -103,7 +111,9 @@ let triviaQuestion = [
             b: 'Havana Brown',
             c: 'Russian blue',
             d: 'Himalayan'},
-        correct: 'd'
+        correct: function(){
+            return this.answer.d;
+        }
     },
     
     {
@@ -113,7 +123,9 @@ let triviaQuestion = [
             b: 'Manx',
             c: 'Munchkin',
             d: 'Napoleon'},
-        correct: 'c'
+        correct: function(){
+            return this.answer.c;
+        }
     },
 
     {
@@ -123,7 +135,9 @@ let triviaQuestion = [
             b: 'Nebelung',
             c: 'Tiffany',
             d: 'Snowshoe'},
-        correct: 'a'
+        correct: function(){
+            return this.answer.a;
+        }
     },
 
     {
@@ -133,7 +147,9 @@ let triviaQuestion = [
             b: 'La Perm',
             c: 'Persian',
             d: 'Abyssinian'},
-        correct: 'd'
+        correct: function(){
+            return this.answer.d;
+        }
     },
 
     {
@@ -143,7 +159,9 @@ let triviaQuestion = [
             b: 'Maine Coon',
             c: 'Ragdoll',
             d: 'Siberian'},
-        correct: 'b'
+        correct: function(){
+            return this.answer.b;
+        }
     },
     
     {
@@ -153,7 +171,9 @@ let triviaQuestion = [
             b: 'Two months',
             c: '1-3 weeks',
             d: 'At birth'},
-        correct: 'c'
+        correct: function (){
+            return this.answer.c;
+        }
     },
     
     {
@@ -163,7 +183,9 @@ let triviaQuestion = [
             b: 'At birth',
             c: '2 weeks',
             d: '6 weeks'},
-        correct: 'd'
+        correct: function(){
+            return this.answer.d;
+        }
     },
 
     {
@@ -173,7 +195,9 @@ let triviaQuestion = [
             b: 'A barn cat',
             c: 'Cats that roam only at night',
             d: 'Cats that roam freely'},
-        correct: 'a'
+        correct: function(){
+            return this.answer.a;
+        }
     },
 
     {
@@ -183,7 +207,9 @@ let triviaQuestion = [
             b: 'Paws',
             c: 'Tubbs',
             d: 'Marmalade'},
-        correct: 'a'
+        correct: function(){
+            return this.answer.a;
+        }
     },
 
     {
@@ -193,7 +219,9 @@ let triviaQuestion = [
             b: '12 Hours',
             c: '4 Hours',
             d: '16 Hours'},
-        correct: 'd'
+        correct: function(){
+            return this.answer.d;
+        }
     }
 ];
 
@@ -201,9 +229,6 @@ let triviaQuestion = [
 $('document').ready(function(){
     pageLoad();
     $('#start').click(start);
-    console.log(triviaQuestion[0].question);
-    console.log(triviaQuestion[0].answer);
-    console.log(triviaQuestion[0].correct());
 });
 
 
@@ -212,15 +237,17 @@ function start(){
     //populate all the questions and answers
     //answer options need to be radio buttons
     //start timer
-   
-
-
+    questions();
 }
 
 //show questions
 function questions(){
-    for (var i=0; i < questions.length; i++){
-       
+    for (var i=0; i < triviaQuestion.length; i++){
+        $("#question").append(triviaQuestion[i].question);
+        $("#answer").append(triviaQuestion[i].answer.a);
+        $("#answer").append(triviaQuestion[i].answer.b);
+        $("#answer").append(triviaQuestion[i].answer.c);
+        $("#answer").append(triviaQuestion[i].answer.d);
     }
 }
 
