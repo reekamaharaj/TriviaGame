@@ -41,7 +41,11 @@ TODO Counter should be displayed so the player knows how much time they have lef
 //function for what happens when the done button is used
 //function for what happens when the timer runs out
 //function to update the timer on the page
-
+let quizContainer = [ ];
+let answerContainera = [ ];
+let answerContainerb = [ ];
+let answerContainerc = [ ];
+let answerContainerd = [ ];
 let triviaQuestion = [
     {
         question: 'How many bones does a cat have?',
@@ -49,7 +53,8 @@ let triviaQuestion = [
             a: 120, 
             b: 192, 
             c: 230, 
-            d: 186},
+            d: 186
+        },
         correct: function(){
                 return this.answer.c;
             } 
@@ -61,168 +66,169 @@ let triviaQuestion = [
             a: 'American Short Hair', 
             b: 'Tabby', 
             c: 'Siamese', 
-            d: 'Persian'},
+            d: 'Persian'
+        },
         correct: function(){
             return this.answer.c;
         }
     },
 
 
-    {
-        question:'How many rows of whiskers does a cat have?',
-        answer:{
-            a: 4,
-            b: 7,
-            c: 2,
-            d: 6},
-        correct: function(){
-            return this.answer.a;
-        }
-    },
+    // {
+    //     question:'How many rows of whiskers does a cat have?',
+    //     answer:{
+    //         a: 4,
+    //         b: 7,
+    //         c: 2,
+    //         d: 6},
+    //     correct: function(){
+    //         return this.answer.a;
+    //     }
+    // },
 
-    {
-        question: 'How many teeth does an adult cat have?',
-        answer:{
-            a: 42,
-            b: 30,
-            c: 36,
-            d: 22},
-        correct: function(){
-            return this.answer.b;
-        }
-    },
+    // {
+    //     question: 'How many teeth does an adult cat have?',
+    //     answer:{
+    //         a: 42,
+    //         b: 30,
+    //         c: 36,
+    //         d: 22},
+    //     correct: function(){
+    //         return this.answer.b;
+    //     }
+    // },
 
-    {
-        question: 'The cat breed "Spotted Mist" is now known as what?',
-        anwer: {    
-            a: 'Canadian Mist',
-            b: 'Belgian Mist',
-            c: 'Australian Mist',
-            d: 'American Mist'},
-        correct: function(){
-            return this.answer.c;
-        }
-    },
+    // {
+    //     question: 'The cat breed "Spotted Mist" is now known as what?',
+    //     anwer: {    
+    //         a: 'Canadian Mist',
+    //         b: 'Belgian Mist',
+    //         c: 'Australian Mist',
+    //         d: 'American Mist'},
+    //     correct: function(){
+    //         return this.answer.c;
+    //     }
+    // },
 
-    {
-        question: 'Which of these cat breeds has long hair?',
-        answer:{
-            a: 'Ocicat',
-            b: 'Havana Brown',
-            c: 'Russian blue',
-            d: 'Himalayan'},
-        correct: function(){
-            return this.answer.d;
-        }
-    },
+    // {
+    //     question: 'Which of these cat breeds has long hair?',
+    //     answer:{
+    //         a: 'Ocicat',
+    //         b: 'Havana Brown',
+    //         c: 'Russian blue',
+    //         d: 'Himalayan'},
+    //     correct: function(){
+    //         return this.answer.d;
+    //     }
+    // },
     
-    {
-        question: 'Which of these breeds is caused by a genetic mutation?',
-        answer: {
-            a: 'Siberian',
-            b: 'Manx',
-            c: 'Munchkin',
-            d: 'Napoleon'},
-        correct: function(){
-            return this.answer.c;
-        }
-    },
+    // {
+    //     question: 'Which of these breeds is caused by a genetic mutation?',
+    //     answer: {
+    //         a: 'Siberian',
+    //         b: 'Manx',
+    //         c: 'Munchkin',
+    //         d: 'Napoleon'},
+    //     correct: function(){
+    //         return this.answer.c;
+    //     }
+    // },
 
-    {
-        question: 'Which of these breeds is native to Kenya?',
-        answer: {
-            a: 'Sokoke',
-            b: 'Nebelung',
-            c: 'Tiffany',
-            d: 'Snowshoe'},
-        correct: function(){
-            return this.answer.a;
-        }
-    },
+    // {
+    //     question: 'Which of these breeds is native to Kenya?',
+    //     answer: {
+    //         a: 'Sokoke',
+    //         b: 'Nebelung',
+    //         c: 'Tiffany',
+    //         d: 'Snowshoe'},
+    //     correct: function(){
+    //         return this.answer.a;
+    //     }
+    // },
 
-    {
-        question: 'Which of these cats has a "ticked coat"?',
-        answer: {
-            a: 'Manx',
-            b: 'La Perm',
-            c: 'Persian',
-            d: 'Abyssinian'},
-        correct: function(){
-            return this.answer.d;
-        }
-    },
+    // {
+    //     question: 'Which of these cats has a "ticked coat"?',
+    //     answer: {
+    //         a: 'Manx',
+    //         b: 'La Perm',
+    //         c: 'Persian',
+    //         d: 'Abyssinian'},
+    //     correct: function(){
+    //         return this.answer.d;
+    //     }
+    // },
 
-    {
-        question: 'Which breed of cat is the largest?',
-        answer: {
-            a: 'Savannah',
-            b: 'Maine Coon',
-            c: 'Ragdoll',
-            d: 'Siberian'},
-        correct: function(){
-            return this.answer.b;
-        }
-    },
+    // {
+    //     question: 'Which breed of cat is the largest?',
+    //     answer: {
+    //         a: 'Savannah',
+    //         b: 'Maine Coon',
+    //         c: 'Ragdoll',
+    //         d: 'Siberian'},
+    //     correct: function(){
+    //         return this.answer.b;
+    //     }
+    // },
     
-    {
-        question: 'When does a kitten open its eyes?',
-        answer: {
-            a: '5 weeks',
-            b: 'Two months',
-            c: '1-3 weeks',
-            d: 'At birth'},
-        correct: function (){
-            return this.answer.c;
-        }
-    },
+    // {
+    //     question: 'When does a kitten open its eyes?',
+    //     answer: {
+    //         a: '5 weeks',
+    //         b: 'Two months',
+    //         c: '1-3 weeks',
+    //         d: 'At birth'},
+    //     correct: function (){
+    //         return this.answer.c;
+    //     }
+    // },
     
-    {
-        question: 'When does a kitten show interest in solid food?',
-        answer: {
-            a: 'Two months',
-            b: 'At birth',
-            c: '2 weeks',
-            d: '6 weeks'},
-        correct: function(){
-            return this.answer.d;
-        }
-    },
+    // {
+    //     question: 'When does a kitten show interest in solid food?',
+    //     answer: {
+    //         a: 'Two months',
+    //         b: 'At birth',
+    //         c: '2 weeks',
+    //         d: '6 weeks'},
+    //     correct: function(){
+    //         return this.answer.d;
+    //     }
+    // },
 
-    {
-        question: 'What best describes a feral cat?',
-        answer:{
-            a: 'A domesticated cat that has returned to the wild',
-            b: 'A barn cat',
-            c: 'Cats that roam only at night',
-            d: 'Cats that roam freely'},
-        correct: function(){
-            return this.answer.a;
-        }
-    },
+    // {
+    //     question: 'What best describes a feral cat?',
+    //     answer:{
+    //         a: 'A domesticated cat that has returned to the wild',
+    //         b: 'A barn cat',
+    //         c: 'Cats that roam only at night',
+    //         d: 'Cats that roam freely'},
+    //     correct: function(){
+    //         return this.answer.a;
+    //     }
+    // },
 
-    {
-        question: 'What is the name of the cat that was left £9m by his reclusive British owner in 1988?',
-        answer: {
-            a: 'Blackie',
-            b: 'Paws',
-            c: 'Tubbs',
-            d: 'Marmalade'},
-        correct: function(){
-            return this.answer.a;
-        }
-    },
+    // {
+    //     question: 'What is the name of the cat that was left £9m by his reclusive British owner in 1988?',
+    //     answer: {
+    //         a: 'Blackie',
+    //         b: 'Paws',
+    //         c: 'Tubbs',
+    //         d: 'Marmalade'},
+    //     correct: function(){
+    //         return this.answer.a;
+    //     }
+    // },
 
-    {
-        question: 'On average, cats spend how much time every day sleeping?',
-        answer: {
-            a: '8 Hours',
-            b: '12 Hours',
-            c: '4 Hours',
-            d: '16 Hours'},
-        correct: function(){
-            return this.answer.d;
-        }
-    }
+    // {
+    //     question: 'On average, cats spend how much time every day sleeping?',
+    //     answer: {
+    //         a: '8 Hours',
+    //         b: '12 Hours',
+    //         c: '4 Hours',
+    //         d: '16 Hours'},
+    //     correct: function(){
+    //         return this.answer.d;
+    //     }
+    // }
 ];
 
 
@@ -237,17 +243,30 @@ function start(){
     //populate all the questions and answers
     //answer options need to be radio buttons
     //start timer
-    questions();
+    populateQuiz();
 }
 
 //show questions
-function questions(){
+function populateQuiz(){
     for (var i=0; i < triviaQuestion.length; i++){
-        $("#question").append(triviaQuestion[i].question);
-        $("#answer").append(triviaQuestion[i].answer.a);
-        $("#answer").append(triviaQuestion[i].answer.b);
-        $("#answer").append(triviaQuestion[i].answer.c);
-        $("#answer").append(triviaQuestion[i].answer.d);
+        
+        quizContainer.push(triviaQuestion[i].question);
+        $("#question").html(quizContainer);
+        
+        answerContainera.push(triviaQuestion[i].answer.a);
+        $("#answera").html(answerContainera);
+
+        answerContainerb.push(triviaQuestion[i].answer.b);
+        $("#answerb").html(answerContainerb);
+
+        answerContainerc.push(triviaQuestion[i].answer.c);
+        $("#answerc").html(answerContainerc);
+
+        answerContainerd.push(triviaQuestion[i].answer.d);
+        $("#answerd").html(answerContainerd);
+        $("#answerd").append("<div></div>")
+
+        
     }
 }
 
