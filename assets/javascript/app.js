@@ -1,12 +1,4 @@
-/* 
-TODO Text saying they didn't finish on time
-TODO Text different if they did finish on time, or used the Done button
-TODO End screen will have the number of correct answers, number of wrong answers, number of unanswered questions and a retry option. 
-TODO Consider making the question randomized so that if they try multiple times there are different questions
-TODO Counter should be displayed so the player knows how much time they have left. 
-*/
-
-// Buttons
+//----Buttons
 // Start - done
 // Done - done
 // Reset - done
@@ -16,26 +8,28 @@ TODO Counter should be displayed so the player knows how much time they have lef
 //Start button - done
 //Extra: different topic options
 
-//-----Trivia page stuuf
+//-----Trivia page stuff
 //Make a layout with radio options for answers - done
 //Timer area - done
 
 //----Result page
 //Restart buttom -done
-//# Correctly Answered Questions
-//# Incorrectly Answered Questions
+//# Correctly Answered Questions -done
+//# Incorrectly Answered Questions -done
 //# Unanswered Questions
-//Different text for if the player ran out of time or if they hit the Done button
 
 //----JS stuff
 //Game start function - reset/sets the timer when the Start or restart button is clicked - done
 //Randomize the questions
 //Generate the questions to the page - done
-//Check the final answers with the correct ones. Only do this if the player hits Done or if the timer runs out
+//Check the final answers with the correct ones. Only do this if the player hits Done or if the timer runs out -done
 //function for what happens when the done button is used - done
 //function for what happens when the timer runs out - done
 //function to update the timer on the page - done
-let triviaQuestion = [
+
+//vars
+
+var triviaQuestion = [
     {
         question: "How many bones does a cat have?",
         answer:{
@@ -228,32 +222,52 @@ var answerB;
 var answerC;
 var answerD;
 
+var correct;
+var incorrect;
+var unanswered = 0;
+var answer;
+
 var intervalId;
 var clockRunning = false;
 var time = 30;
 
+//document load
 $('document').ready(function(){
-    $('#start').click(start);
-    $('#done').click(endTrivia);
-    $('#reset').click(start);
-    $('#done').hide();
+    $("#start").click(start);
+    $("#done").click(endTrivia);
+    $("#reset").click(reset);
+    $("#done").hide();
     $("#reset").hide();
+    $("#outOfTime").hide();
+    $("#onTime").hide();
+
+    $('input[type="radio"]').click(function(e){
+        var radioVal = 
+        $('input[name="answer' + i + '"]:checked').val();
+            if (radioVal===triviaQuestion[i].correct){
+            correct++;
+            }
+            else {
+                incorrect++;
+            }
+    });
 });
 
+//functions
 
+//start 
 function start(){
     timerStart();
-    populateQuiz();
+    populateTriv();
     $("#sec").text("30");
-    $("#start").remove();
+    $("#start").hide();
     $("#howto").remove();
     $("#done").show();
-    $("#reset").hide();
-    $('#timer').show();
+    $("#timer").show();
 }
 
-//show questions
-function populateQuiz(){
+//questions added
+function populateTriv(){
     for (var i=0; i < triviaQuestion.length; i++){
 
         questionContainer = undefined;
@@ -267,19 +281,22 @@ function populateQuiz(){
 
         question = '<label class="inline-flex items-center px-4 py-2 font-bold text-orange-800" id="question">' + '<span class="ml-2 px-4 py-2 text-orange-800">' + triviaQuestion[i].question + '</span>' + '</label>';
 
-        answerA = '<label class="inline-flex items-center px-4 py-2 font-bold text-orange-800" id="answerA">' + '<input type="radio" class="answerA" name="answer" value="a">' + '</input>' + '<span class="ml-2 px-4 py-2 text-orange-800">' + triviaQuestion[i].answer.a + '</span>' + '</label>';
+        answerA = '<label class="inline-flex items-center px-4 py-2 font-bold text-orange-800" id="answerA">' + '<input type="radio" class="answerA" name="answer' + i + '" value="a">' + '</input>' + '<span class="ml-2 px-4 py-2 text-orange-800">' + triviaQuestion[i].answer.a + '</span>' + '</label>';
 
-        answerB = '<label class="inline-flex items-center px-4 py-2 font-bold text-orange-800" id="answerB">' + '<input type="radio" class="answerB" name="answer" value="b">' + '</input>' + '<span class="ml-2 px-4 py-2 text-orange-800 ">' + triviaQuestion[i].answer.b + '</span>' + '</label>';
+        answerB = '<label class="inline-flex items-center px-4 py-2 font-bold text-orange-800" id="answerB">' + '<input type="radio" class="answerB" name="answer' + i + '" value="b">' + '</input>' + '<span class="ml-2 px-4 py-2 text-orange-800 ">' + triviaQuestion[i].answer.b + '</span>' + '</label>';
 
-        answerC = '<label class="inline-flex items-center px-4 py-2 font-bold text-orange-800"id="answerC">' + '<input type="radio" class="answerC" name="answer" value="c">' + '</input>' + '<span class="ml-2 px-4 py-2 text-orange-800 ">' + triviaQuestion[i].answer.c + '</span>' + '</label>';
+        answerC = '<label class="inline-flex items-center px-4 py-2 font-bold text-orange-800"id="answerC">' + '<input type="radio" class="answerC" name="answer' + i + '" value="c">' + '</input>' + '<span class="ml-2 px-4 py-2 text-orange-800 ">' + triviaQuestion[i].answer.c + '</span>' + '</label>';
 
-        answerD = '<label class="inline-flex items-center px-4 py-2 font-bold text-orange-800" id="answerD">' + '<input type="radio" class="answerD" name="answer" value="d">' + '</input>' + '<span class="ml-2 px-4 py-2 text-orange-800 ">' + triviaQuestion[i].answer.d + '</span>' + '</label>';
+        answerD = '<label class="inline-flex items-center px-4 py-2 font-bold text-orange-800" id="answerD">' + '<input type="radio" class="answerD" name="answer' + i + '" value="d">' + '</input>' + '<span class="ml-2 px-4 py-2 text-orange-800 ">' + triviaQuestion[i].answer.d + '</span>' + '</label>';
 
         questionContainer.append(question, answerA, answerB, answerC, answerD);
         $("#triviaAll").append(questionContainer);
+        
+
     }
 }
 
+//start timer
 function timerStart(){
     if (!clockRunning) {
         intervalId = setInterval(decrement, 1000);
@@ -287,6 +304,7 @@ function timerStart(){
     }
 }
 
+//timer decrement
 function decrement(){
     time--;
     $("#sec").text(time);
@@ -295,6 +313,7 @@ function decrement(){
     }
 }
 
+//game over
 function endTrivia(){
     clearInterval(intervalId);
     clockRunning = false;
@@ -303,5 +322,48 @@ function endTrivia(){
     $("#reset").show();
     $("#timer").hide();
     $("label").remove();
+    unanswered = triviaQuestion.length - (correct + incorrect);
+    results();
 
+    if (time === 0){
+        $("#outOfTime").show();
+        $("#correctAns").text();
+        $("#incorrectAns").text();
+        $("#unanswered").text();
+    }
+    else {
+        $("#onTime").show();
+        $("#correctAns").text();
+        $("#incorrectAns").text();
+        $("#unanswered").text();
+    }
+
+}
+
+// reset
+function reset(){
+    $("#reset").hide();
+    $("#done").hide();
+    $("#outOfTime").hide();
+    $("#onTime").hide();
+    $("#timer").hide();
+    $("#start").show();
+    $("#correctAns").hide();
+    $("#incorrectAns").hide();
+    $("#unanswered").hide();
+
+    correct = 0;
+    incorrect = 0;
+    unanswered = 0;
+    answer =0;
+    intervalId = 0;
+    clockRunning = false;
+    time = 30;
+}
+
+// results
+function results(){
+    $("#correctAns").text("Correct Answers: " + correct);
+    $("#incorrectAns").text("Incorrect Answers: " + incorrect);
+    $("#unanswered").text("Unanswered Questions: ");
 }
