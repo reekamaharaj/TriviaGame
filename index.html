@@ -25,22 +25,26 @@
             </div>
 
             
-            <button class="w-full bg-orange-500 hover:bg-orange-400 text-white font-bold py-2 px-4 border-b-4 border-orange-700 hover:border-orange-500 rounded" id="start"> Start </button> 
+            <button class="w-full bg-orange-500 hover:bg-orange-400 text-white font-bold py-2 px-4 border-b-4 border-orange-700 hover:border-orange-500 rounded mb-4" id="start"> Start </button> 
 
-            <div class="flex flex-col w-full md:flex-row">
-                <div class="flex flex-col px-6 py-5 m-6 font-normal text-orange-800">
-                    <h1 class="my-4 text-3xl font-bold text-orange-800" id="question"></h1>
-                    <div class="flex inline" id="answerContainer">
-                        <p class="w-1/4" id="answera"></p>
-                        <p class="w-1/4" id="answerb"></p>
-                        <p class="w-1/4" id="answerc"></p>
-                        <p class="w-1/4" id="answerd"></p>
-                    </div>
-                </div>
+            <div class="w-full bg-red-700 text-white text-2xl text-center" id="timer">
+                <div id="sec"></div>
             </div>
 
+            <div class="w-full text-orange-800 text-2xl p-8 text-center" id="howto">
+                You have 20 seconds to answer 5 trivia questions about cats. Are you ready? Click start!
+            </div>
+
+            <div id="triviaAll"> </div>
+
+            <div id=""></div>
+            
             <div class="flex justify-center mb-5">
                 <button class="max-w-xs bg-orange-500 hover:bg-orange-400 text-white font-bold py-2 px-4 border-b-4 border-orange-700 hover:border-orange-500 rounded" id="done"> Done </button>
+            </div> 
+
+            <div class="flex justify-center mb-5">
+                <button class="max-w-xs bg-orange-500 hover:bg-orange-400 text-white font-bold py-2 px-6 border-b-4 border-orange-700 hover:border-orange-500 rounded" id="reset"> Reset </button>
             </div> 
 
         </div>
