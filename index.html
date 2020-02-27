@@ -11,20 +11,20 @@
     <title>Cat Trivia Game</title>
 </head>
 
-<body>
+<body class="h-full bg-orange-700">
 
-    <div class="flex bg-orange-700 h-screen px-4 items-center justify-center">
+    <div class="flex py-8 px-4 items-center justify-center">
         <div class="flex flex-col bg-orange-200 w-full rounded shadow-lg max-w-4xl">
 
             <div class="w-full h-64 bg-top bg-cover rounded" style="background-image: url(assets/images/emandyu.jpg)"></div>
 
             <div class="flex w-full md:flex-row justify-center">
                 <div class="flex flex-col p-4 font-normal text-orange-800">
-                    <h1 class="mb-4 text-4xl font-bold text-orange-800">Cat Trivia</h1>
+                    <h1 class="text-4xl font-bold text-orange-800">Cat Trivia</h1>
                 </div>
             </div>
 
-            
+
             <button class="w-full bg-orange-500 hover:bg-orange-400 text-white font-bold py-2 px-4 border-b-4 border-orange-700 hover:border-orange-500 rounded mb-4" id="start"> Start </button> 
 
             <div class="w-full bg-red-700 text-white text-2xl text-center" id="timer">
@@ -37,11 +37,10 @@
 
             <div id="triviaAll"> </div>
 
-            <div class="w-full text-orange-800 text-2xl p-8 text-center" id="outOfTime">You ran out of time!</div>
-            <div class="w-full text-orange-800 text-2xl p-8 text-center" id="onTime">Lets see how you did...</div>
-            <div class="w-full text-orange-800 text-2xl p-8 text-center" id="correctAns"></div>
-            <div class="w-full text-orange-800 text-2xl p-8 text-center" id="incorrectAns"></div>
-            <div class="w-full text-orange-800 text-2xl p-8 text-center" id="unanswered"></div>
+            <div class="w-full text-orange-800 text-2xl p-5 text-center" id="outOfTime">Lets see how you did...</div>
+            <div class="w-full text-orange-800 text-xl p-2 text-center" id="correctAns"></div>
+            <div class="w-full text-orange-800 text-xl p-2 text-center" id="incorrectAns"></div>
+            <div class="w-full text-orange-800 text-xl p-2 text-center" id="unanswered"></div>
 
             
             <div class="flex justify-center mb-5">

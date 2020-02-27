@@ -81,17 +81,17 @@ var triviaQuestion = [
         }
     },
 
-    // {
-    //     question: "The cat breed 'Spotted Mist' is now known as what?",
-    //     anwer: {
-    //         a: "Canadian Mist",
-    //         b: "Belgian Mist",
-    //         c: "Australian Mist",
-    //         d: "American Mist"},
-    //     correct: function(){
-    //         return this.answer.c;
-    //     }
-    // },
+    {
+        question: "The cat breed 'Spotted Mist' is now known as what?",
+        answer:{
+            a: "Canadian Mist",
+            b: "Belgian Mist",
+            c: "Australian Mist",
+            d: "American Mist"},
+        correct: function(){
+            return this.answer.c;
+        }
+    },
 
     // {
     //     question: "Which of these cat breeds has long hair?",
@@ -214,7 +214,7 @@ var triviaQuestion = [
     // }
 ];
 
-var trivaAll;
+var questionnumber;
 var questionContainer;
 var question;
 var answerA;
@@ -222,8 +222,8 @@ var answerB;
 var answerC;
 var answerD;
 
-var correct;
-var incorrect;
+var correct = 0;
+var incorrect =0;
 var unanswered = 0;
 var answer;
 
@@ -231,26 +231,24 @@ var intervalId;
 var clockRunning = false;
 var time = 30;
 
+//click events
+
+
 //document load
 $('document').ready(function(){
     $("#start").click(start);
     $("#done").click(endTrivia);
     $("#reset").click(reset);
+
+
+    $("#timer").hide();
+    $("#outOfTime").hide();
+    $("#correctAns").hide();
+    $("#incorrectAns").hide();
+    $("#unanswered").hide();
     $("#done").hide();
     $("#reset").hide();
-    $("#outOfTime").hide();
-    $("#onTime").hide();
 
-    $('input[type="radio"]').click(function(e){
-        var radioVal = 
-        $('input[name="answer' + i + '"]:checked').val();
-            if (radioVal===triviaQuestion[i].correct){
-            correct++;
-            }
-            else {
-                incorrect++;
-            }
-    });
 });
 
 //functions
@@ -260,16 +258,18 @@ function start(){
     timerStart();
     populateTriv();
     $("#sec").text("30");
-    $("#start").hide();
-    $("#howto").remove();
-    $("#done").show();
     $("#timer").show();
+    $("#done").show();
+    $("#triviaAll").show();
+    $("#start").hide();
+    $("#howto").hide();
 }
 
 //questions added
 function populateTriv(){
     for (var i=0; i < triviaQuestion.length; i++){
 
+        questionnumber=i;
         questionContainer = undefined;
         question = undefined;
         answerA = undefined;
@@ -281,13 +281,13 @@ function populateTriv(){
 
         question = '<label class="inline-flex items-center px-4 py-2 font-bold text-orange-800" id="question">' + '<span class="ml-2 px-4 py-2 text-orange-800">' + triviaQuestion[i].question + '</span>' + '</label>';
 
-        answerA = '<label class="inline-flex items-center px-4 py-2 font-bold text-orange-800" id="answerA">' + '<input type="radio" class="answerA" name="answer' + i + '" value="a">' + '</input>' + '<span class="ml-2 px-4 py-2 text-orange-800">' + triviaQuestion[i].answer.a + '</span>' + '</label>';
+        answerA = '<label class="inline-flex items-center px-4 py-2 font-bold text-orange-800" id="answerA">' + '<input type="radio" class="' + i + '" name="answer" value="a" onClick="clicked(this.value, this.class)">' + '</input>' + '<span class="ml-2 px-4 py-2 text-orange-800">' + triviaQuestion[i].answer.a + '</span>' + '</label>';
 
-        answerB = '<label class="inline-flex items-center px-4 py-2 font-bold text-orange-800" id="answerB">' + '<input type="radio" class="answerB" name="answer' + i + '" value="b">' + '</input>' + '<span class="ml-2 px-4 py-2 text-orange-800 ">' + triviaQuestion[i].answer.b + '</span>' + '</label>';
+        answerB = '<label class="inline-flex items-center px-4 py-2 font-bold text-orange-800" id="answerB">' + '<input type="radio" class="' + i + '" name="answer" value="b" onClick="clicked(this.value, this.class)">' + '</input>' + '<span class="ml-2 px-4 py-2 text-orange-800 ">' + triviaQuestion[i].answer.b + '</span>' + '</label>';
 
-        answerC = '<label class="inline-flex items-center px-4 py-2 font-bold text-orange-800"id="answerC">' + '<input type="radio" class="answerC" name="answer' + i + '" value="c">' + '</input>' + '<span class="ml-2 px-4 py-2 text-orange-800 ">' + triviaQuestion[i].answer.c + '</span>' + '</label>';
+        answerC = '<label class="inline-flex items-center px-4 py-2 font-bold text-orange-800"id="answerC">' + '<input type="radio" class="' + i + '" name="answer" value="c" onClick="clicked(this.value, this.class)">' + '</input>' + '<span class="ml-2 px-4 py-2 text-orange-800 ">' + triviaQuestion[i].answer.c + '</span>' + '</label>';
 
-        answerD = '<label class="inline-flex items-center px-4 py-2 font-bold text-orange-800" id="answerD">' + '<input type="radio" class="answerD" name="answer' + i + '" value="d">' + '</input>' + '<span class="ml-2 px-4 py-2 text-orange-800 ">' + triviaQuestion[i].answer.d + '</span>' + '</label>';
+        answerD = '<label class="inline-flex items-center px-4 py-2 font-bold text-orange-800" id="answerD">' + '<input type="radio" class="' + i + '" name="answer" value="d" onClick="clicked(this.value, this.class)">' + '</input>' + '<span class="ml-2 px-4 py-2 text-orange-800 ">' + triviaQuestion[i].answer.d + '</span>' + '</label>';
 
         questionContainer.append(question, answerA, answerB, answerC, answerD);
         $("#triviaAll").append(questionContainer);
@@ -321,36 +321,30 @@ function endTrivia(){
     $("#done").hide();
     $("#reset").show();
     $("#timer").hide();
+    $("#triviaAll").hide();
     $("label").remove();
+    $("#outOfTime").show();
+    $("#correctAns").show().text("Correct: " + correct);
+    $("#incorrectAns").show().text("Incorrect: " + incorrect);
     unanswered = triviaQuestion.length - (correct + incorrect);
+    $("#unanswered").show().text("Unanswered: " + unanswered);
     results();
-
-    if (time === 0){
-        $("#outOfTime").show();
-        $("#correctAns").text();
-        $("#incorrectAns").text();
-        $("#unanswered").text();
-    }
-    else {
-        $("#onTime").show();
-        $("#correctAns").text();
-        $("#incorrectAns").text();
-        $("#unanswered").text();
-    }
 
 }
 
 // reset
 function reset(){
-    $("#reset").hide();
-    $("#done").hide();
+    $("#timer").show();
+    $("#done").show();
+    $("#triviaAll").show();
+    $("#start").hide();
+    $("#howTo").hide();
     $("#outOfTime").hide();
-    $("#onTime").hide();
-    $("#timer").hide();
-    $("#start").show();
     $("#correctAns").hide();
     $("#incorrectAns").hide();
     $("#unanswered").hide();
+    $("#reset").hide();
+    start();
 
     correct = 0;
     incorrect = 0;
@@ -365,5 +359,27 @@ function reset(){
 function results(){
     $("#correctAns").text("Correct Answers: " + correct);
     $("#incorrectAns").text("Incorrect Answers: " + incorrect);
-    $("#unanswered").text("Unanswered Questions: ");
+    $("#unanswered").text("Unanswered Questions: " + unanswered);
 }
+
+//check selected answer
+function clicked(x, y){
+    var questionans = triviaQuestion[((parseInt(y))-1)].correct();
+    var choice = x;
+
+    if (questionans === choice){
+        correct++;
+        console.log("correct");
+    }
+    else if(questionans === undefined){
+        unanswered++;
+        console.log("unanswered");
+    }
+    else {
+        incorrect++;
+        console.log('incorrect');
+    }
+    
+        //for the radio button clicked... class will tell you which question number it is, value will tell you what the user chose. triviaquestion.answer.correct will be the correct answer. if its correct then add 1 to the correct, if its incorrect add 1 to incorrect. if it is nothing is clicked then add one to unanswered. class-1 would be the index of the quesion if needed
+}
+
