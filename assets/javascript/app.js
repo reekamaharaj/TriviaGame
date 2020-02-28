@@ -16,7 +16,7 @@
 //Restart buttom -done
 //# Correctly Answered Questions -done
 //# Incorrectly Answered Questions -done
-//# Unanswered Questions
+//# Unanswered Questions -done
 
 //----JS stuff
 //Game start function - reset/sets the timer when the Start or restart button is clicked - done
@@ -214,7 +214,6 @@ var triviaQuestion = [
     // }
 ];
 
-var questionnumber;
 var questionContainer;
 var question;
 var answerA;
@@ -225,21 +224,15 @@ var answerD;
 var correct = 0;
 var incorrect =0;
 var unanswered = 0;
-var answer;
 
-var intervalId;
 var clockRunning = false;
-var time = 30;
-
-//click events
-
+var time = 300;
 
 //document load
 $('document').ready(function(){
     $("#start").click(start);
     $("#done").click(endTrivia);
     $("#reset").click(reset);
-
 
     $("#timer").hide();
     $("#outOfTime").hide();
@@ -248,7 +241,6 @@ $('document').ready(function(){
     $("#unanswered").hide();
     $("#done").hide();
     $("#reset").hide();
-
 });
 
 //functions
@@ -269,7 +261,6 @@ function start(){
 function populateTriv(){
     for (var i=0; i < triviaQuestion.length; i++){
 
-        questionnumber=i;
         questionContainer = undefined;
         question = undefined;
         answerA = undefined;
@@ -281,13 +272,13 @@ function populateTriv(){
 
         question = '<label class="inline-flex items-center px-4 py-2 font-bold text-orange-800" id="question">' + '<span class="ml-2 px-4 py-2 text-orange-800">' + triviaQuestion[i].question + '</span>' + '</label>';
 
-        answerA = '<label class="inline-flex items-center px-4 py-2 font-bold text-orange-800" id="answerA">' + '<input type="radio" class="' + i + '" name="answer" value="a" onClick="clicked(this.value, this.class)">' + '</input>' + '<span class="ml-2 px-4 py-2 text-orange-800">' + triviaQuestion[i].answer.a + '</span>' + '</label>';
+        answerA = '<label class="inline-flex items-center px-4 py-2 font-bold text-orange-800" id="answerA">' + '<input type="radio" class="' + i + '" name="answer' + i + '" value="a" onClick="clicked(this.value, this.className)">' + '</input>' + '<span class="ml-2 px-4 py-2 text-orange-800">' + triviaQuestion[i].answer.a + '</span>' + '</label>';
 
-        answerB = '<label class="inline-flex items-center px-4 py-2 font-bold text-orange-800" id="answerB">' + '<input type="radio" class="' + i + '" name="answer" value="b" onClick="clicked(this.value, this.class)">' + '</input>' + '<span class="ml-2 px-4 py-2 text-orange-800 ">' + triviaQuestion[i].answer.b + '</span>' + '</label>';
+        answerB = '<label class="inline-flex items-center px-4 py-2 font-bold text-orange-800" id="answerB">' + '<input type="radio" class="' + i + '" name="answer' + i + '" value="b" onClick="clicked(this.value, this.className)">' + '</input>' + '<span class="ml-2 px-4 py-2 text-orange-800 ">' + triviaQuestion[i].answer.b + '</span>' + '</label>';
 
-        answerC = '<label class="inline-flex items-center px-4 py-2 font-bold text-orange-800"id="answerC">' + '<input type="radio" class="' + i + '" name="answer" value="c" onClick="clicked(this.value, this.class)">' + '</input>' + '<span class="ml-2 px-4 py-2 text-orange-800 ">' + triviaQuestion[i].answer.c + '</span>' + '</label>';
+        answerC = '<label class="inline-flex items-center px-4 py-2 font-bold text-orange-800"id="answerC">' + '<input type="radio" class="' + i + '" name="answer' + i + '" value="c" onClick="clicked(this.value, this.className)">' + '</input>' + '<span class="ml-2 px-4 py-2 text-orange-800 ">' + triviaQuestion[i].answer.c + '</span>' + '</label>';
 
-        answerD = '<label class="inline-flex items-center px-4 py-2 font-bold text-orange-800" id="answerD">' + '<input type="radio" class="' + i + '" name="answer" value="d" onClick="clicked(this.value, this.class)">' + '</input>' + '<span class="ml-2 px-4 py-2 text-orange-800 ">' + triviaQuestion[i].answer.d + '</span>' + '</label>';
+        answerD = '<label class="inline-flex items-center px-4 py-2 font-bold text-orange-800" id="answerD">' + '<input type="radio" class="' + i + '" name="answer' + i + '" value="d" onClick="clicked(this.value, this.className)">' + '</input>' + '<span class="ml-2 px-4 py-2 text-orange-800 ">' + triviaQuestion[i].answer.d + '</span>' + '</label>';
 
         questionContainer.append(question, answerA, answerB, answerC, answerD);
         $("#triviaAll").append(questionContainer);
@@ -364,22 +355,26 @@ function results(){
 
 //check selected answer
 function clicked(x, y){
-    var questionans = triviaQuestion[((parseInt(y))-1)].correct();
-    var choice = x;
+    //x is the answer chosen(onclick) y is the index in trivia question
+    //Makes the index an int 
+    const question = triviaQuestion[parseInt(y)];
+    //uses the index to find what the corrext answer is
+    var questionAns = question.correct(); 
+    //takes the choice clicked (a,b,c,d) and looks in trivia question to find the answer
+    var choice = question.answer[x];
 
-    if (questionans === choice){
+    if (questionAns === choice){
         correct++;
-        console.log("correct");
+
     }
     else if(questionans === undefined){
         unanswered++;
-        console.log("unanswered");
+
     }
     else {
         incorrect++;
-        console.log('incorrect');
+
     }
-    
-        //for the radio button clicked... class will tell you which question number it is, value will tell you what the user chose. triviaquestion.answer.correct will be the correct answer. if its correct then add 1 to the correct, if its incorrect add 1 to incorrect. if it is nothing is clicked then add one to unanswered. class-1 would be the index of the quesion if needed
+
 }
 
