@@ -169,7 +169,7 @@ let answers = {};
 var randArr = [ ];
 
 let timerRunning = false;
-let time = 20;
+let time = 0;
 
 //document load
 $('document').ready(function(){
@@ -215,6 +215,7 @@ function populateTriv(){
     for (i=0; i < randArr.length; i++){
 
         unanswered++;
+        time = time + 5;
         questionContainer = undefined;
         question = undefined;
         answerA = undefined;
@@ -275,7 +276,7 @@ function endTrivia(){
     results();
     clearInterval(intervalId);
     timerRunning = false;
-    time = 20;
+    time = 0;
 }
 
 function clicked(currentAns, qIndex){
@@ -329,7 +330,7 @@ function reset(){
     answer =0;
     intervalId = 0;
     timerRunning = false;
-    time = 20;
+    time = 0;
     unanswered = 0;
     answers = { };
     randArr = [ ];
