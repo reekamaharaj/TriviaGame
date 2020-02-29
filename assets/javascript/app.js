@@ -198,8 +198,6 @@ function start(){
     $("#triviaAll").show();
     $("#start").hide();
     $("#howto").hide();
-
-    console.log("correct " + correct + "incorrect " + incorrect + "unanswered " + unanswered);
 }
 
 //Random Questions
@@ -208,9 +206,7 @@ function randQuestions(){
         var random = triviaQuestion[Math.floor(Math.random()*15)];
         randArr.push(random);
     }    
-    console.log(randArr);
     populateTriv();
-    console.log("correct " + correct + "incorrect " + incorrect + "unanswered " + unanswered);
 }
 
 
@@ -280,8 +276,6 @@ function endTrivia(){
     clearInterval(intervalId);
     timerRunning = false;
     time = 20;
-    
-    console.log("correct " + correct + "incorrect " + incorrect + "unanswered " + unanswered);
 }
 
 function clicked(currentAns, qIndex){
@@ -295,8 +289,6 @@ function clicked(currentAns, qIndex){
 
     answers[qIndexInt] = currentAnsObj;
     answerArray = Object.values(answers);
-
-    console.log("correct " + correct + "incorrect " + incorrect + "unanswered " + unanswered);
     }
 
 
@@ -312,8 +304,6 @@ function results(){
             unanswered--;
         }
     }
-
-    console.log("correct " + correct + "incorrect " + incorrect + "unanswered " + unanswered);
 
     $("#correctAns").text("Correct Answers: " + correct);
     $("#incorrectAns").text("Incorrect Answers: " + incorrect);
@@ -371,7 +361,7 @@ function reset(){
 
 //----JS stuff
 //Game start function - reset/sets the timer when the Start or restart button is clicked - done
-//Randomize the questions
+//Randomize the questions - done
 //Generate the questions to the page - done
 //Check the final answers with the correct ones. Only do this if the player hits Done or if the timer runs out -done
 //function for what happens when the done button is used - done
