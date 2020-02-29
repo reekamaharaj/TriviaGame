@@ -1,35 +1,6 @@
-//----Buttons
-// Start - done
-// Done - done
-// Reset - done
-
-//----Load page
-//Directions for the game - done
-//Start button - done
-//Extra: different topic options
-
-//-----Trivia page stuff
-//Make a layout with radio options for answers - done
-//Timer area - done
-
-//----Result page
-//Restart buttom -done
-//# Correctly Answered Questions -done
-//# Incorrectly Answered Questions -done
-//# Unanswered Questions -done
-
-//----JS stuff
-//Game start function - reset/sets the timer when the Start or restart button is clicked - done
-//Randomize the questions
-//Generate the questions to the page - done
-//Check the final answers with the correct ones. Only do this if the player hits Done or if the timer runs out -done
-//function for what happens when the done button is used - done
-//function for what happens when the timer runs out - done
-//function to update the timer on the page - done
-
 //vars
 
-var triviaQuestion = [
+const triviaQuestion = [
     {
         question: "How many bones does a cat have?",
         answer:{
@@ -214,19 +185,20 @@ var triviaQuestion = [
     // }
 ];
 
-var questionContainer;
-var question;
-var answerA;
-var answerB;
-var answerC;
-var answerD;
+let questionContainer;
+let question;
+let answerA;
+let answerB;
+let answerC;
+let answerD;
 
-var correct = 0;
-var incorrect =0;
-var unanswered = 0;
+let correct = 0;
+let incorrect =0;
+let unanswered = 0;
+let answers = {};
 
-var clockRunning = false;
-var time = 300;
+let timerRunning = false;
+const time = 300;
 
 //document load
 $('document').ready(function(){
@@ -249,7 +221,6 @@ $('document').ready(function(){
 function start(){
     timerStart();
     populateTriv();
-    $("#sec").text("30");
     $("#timer").show();
     $("#done").show();
     $("#triviaAll").show();
@@ -259,7 +230,7 @@ function start(){
 
 //questions added
 function populateTriv(){
-    for (var i=0; i < triviaQuestion.length; i++){
+    for (i=0; i < triviaQuestion.length; i++){
 
         questionContainer = undefined;
         question = undefined;
@@ -289,9 +260,9 @@ function populateTriv(){
 
 //start timer
 function timerStart(){
-    if (!clockRunning) {
+    if (!timerRunning) {
         intervalId = setInterval(decrement, 1000);
-        clockRunning = true;
+        timerRunning = true;
     }
 }
 
@@ -306,20 +277,55 @@ function decrement(){
 
 //game over
 function endTrivia(){
-    clearInterval(intervalId);
-    clockRunning = false;
-    time = 30;
     $("#done").hide();
-    $("#reset").show();
     $("#timer").hide();
     $("#triviaAll").hide();
-    $("label").remove();
+    $("#reset").show();
     $("#outOfTime").show();
+    $("label").remove();
+
     $("#correctAns").show().text("Correct: " + correct);
     $("#incorrectAns").show().text("Incorrect: " + incorrect);
     unanswered = triviaQuestion.length - (correct + incorrect);
     $("#unanswered").show().text("Unanswered: " + unanswered);
+
     results();
+    clearInterval(intervalId);
+    timerRunning = false;
+    time = 20;
+}
+
+function clicked(currentAns, qIndex){
+    const qIndexInt = parseInt(qIndex);
+    const question = triviaQuestion[qIndexInt];
+    
+    const currentAnsObj = {
+        correctAns: question.correct(),
+        radioAns: currentAns
+    }
+
+    answers[qIndexInt] = currentAnsObj;
+}
+
+// results
+function results(){
+    
+    console.log("correct  " + correct);
+    console.log("incorrect  " + incorrect);
+    console.log("unanswered  " + unanswered);
+    
+    if (){
+        correct++;
+        unanswered--;
+    }
+    else {
+        incorrect++;
+        unanswered--;
+    }
+
+    $("#correctAns").text("Correct Answers: " + correct);
+    $("#incorrectAns").text("Incorrect Answers: " + incorrect);
+    $("#unanswered").text("Unanswered Questions: " + unanswered);
 
 }
 
@@ -335,46 +341,47 @@ function reset(){
     $("#incorrectAns").hide();
     $("#unanswered").hide();
     $("#reset").hide();
-    start();
 
     correct = 0;
     incorrect = 0;
-    unanswered = 0;
     answer =0;
     intervalId = 0;
-    clockRunning = false;
-    time = 30;
+    timerRunning = false;
+    time = 20;
+    unanswered = 0;
+
+    start();
 }
 
-// results
-function results(){
-    $("#correctAns").text("Correct Answers: " + correct);
-    $("#incorrectAns").text("Incorrect Answers: " + incorrect);
-    $("#unanswered").text("Unanswered Questions: " + unanswered);
-}
 
-//check selected answer
-function clicked(x, y){
-    //x is the answer chosen(onclick) y is the index in trivia question
-    //Makes the index an int 
-    const question = triviaQuestion[parseInt(y)];
-    //uses the index to find what the corrext answer is
-    var questionAns = question.correct(); 
-    //takes the choice clicked (a,b,c,d) and looks in trivia question to find the answer
-    var choice = question.answer[x];
 
-    if (questionAns === choice){
-        correct++;
+    //----Buttons
+// Start - done
+// Done - done
+// Reset - done
 
-    }
-    else if(questionans === undefined){
-        unanswered++;
+//----Load page
+//Directions for the game - done
+//Start button - done
+//Extra: different topic options
 
-    }
-    else {
-        incorrect++;
+//-----Trivia page stuff
+//Make a layout with radio options for answers - done
+//Timer area - done
 
-    }
+//----Result page
+//Restart buttom -done
+//# Correctly Answered Questions -done
+//# Incorrectly Answered Questions -done
+//# Unanswered Questions -done
 
-}
+//----JS stuff
+//Game start function - reset/sets the timer when the Start or restart button is clicked - done
+//Randomize the questions
+//Generate the questions to the page - done
+//Check the final answers with the correct ones. Only do this if the player hits Done or if the timer runs out -done
+//function for what happens when the done button is used - done
+//function for what happens when the timer runs out - done
+//function to update the timer on the page - done
+
 
