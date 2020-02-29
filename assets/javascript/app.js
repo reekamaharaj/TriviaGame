@@ -169,7 +169,7 @@ let answers = {};
 var randArr = [ ];
 
 let timerRunning = false;
-let time = 0;
+let time = 1;
 
 //document load
 $('document').ready(function(){
@@ -276,7 +276,7 @@ function endTrivia(){
     results();
     clearInterval(intervalId);
     timerRunning = false;
-    time = 0;
+    time = 1;
 }
 
 function clicked(currentAns, qIndex){
@@ -330,7 +330,7 @@ function reset(){
     answer =0;
     intervalId = 0;
     timerRunning = false;
-    time = 0;
+    time = 1;
     unanswered = 0;
     answers = { };
     randArr = [ ];
