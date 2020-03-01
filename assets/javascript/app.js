@@ -161,15 +161,17 @@ let answerA;
 let answerB;
 let answerC;
 let answerD;
+let answerArray = [ ];
 
 let correct = 0;
 let incorrect =0;
 let unanswered = 0;
 let answers = {};
-var randArr = [ ];
+let randArr = [ ];
 
 let timerRunning = false;
-let time = 1;
+let time = 0;
+let intervalId;
 
 //document load
 $('document').ready(function(){
@@ -190,6 +192,8 @@ $('document').ready(function(){
 
 //start 
 function start(){
+    time = 25;
+    decrement();
     timerStart();
     randQuestions();
 
@@ -202,9 +206,14 @@ function start(){
 
 //Random Questions
 function randQuestions(){
-    for (i=0; i < 5; i++){
-        var random = triviaQuestion[Math.floor(Math.random()*15)];
-        randArr.push(random);
+    for (let i = triviaQuestion.length -1; i > 0; i--){
+        const j = Math.floor(Math.random()*i);
+        const temp = triviaQuestion[i];
+        triviaQuestion[i] = triviaQuestion[j];
+        triviaQuestion[j] = temp;
+    }
+    for (let i=0; i < 5; i++){
+        randArr.push(triviaQuestion[i]);
     }    
     populateTriv();
 }
@@ -215,7 +224,6 @@ function populateTriv(){
     for (i=0; i < randArr.length; i++){
 
         unanswered++;
-        time = time + 5;
         questionContainer = undefined;
         question = undefined;
         answerA = undefined;
@@ -223,17 +231,17 @@ function populateTriv(){
         answerC = undefined;
         answerD = undefined;
 
-        questionContainer = $('<div class="flex mt-2" id="questionContainer">');
+        questionContainer = $('<div class="questionContainer flex">');
 
-        question = '<label class="inline-flex items-center px-4 py-2 font-bold text-orange-800" id="question">' + '<span class="ml-2 px-4 py-2 text-orange-800">' + randArr[i].question + '</span>' + '</label>';
+        question = '<label class="inline-flex items-center px-4 py-2 font-bold text-orange-800 w-1/3" id="question">' + '<span class="ml-2 px-4 py-2 text-orange-800">' + randArr[i].question + '</span>' + '</label>';
 
-        answerA = '<label class="inline-flex items-center px-4 py-2 font-bold text-orange-800" id="answerA">' + '<input type="radio" class="' + i + '" name="answer' + i + '" value="a" onClick="clicked(this.value, this.className)">' + '</input>' + '<span class="ml-2 px-4 py-2 text-orange-800">' + randArr[i].answer.a + '</span>' + '</label>';
+        answerA = '<label class="inline-flex items-center px-4 py-2 font-bold text-orange-800 w-1/4" id="answerA">' + '<input type="radio" class="' + i + '" name="answer' + i + '" value="a" onClick="clicked(this.value, this.className)">' + '</input>' + '<span class="ml-2 px-4 py-2 text-orange-800">' + randArr[i].answer.a + '</span>' + '</label>';
 
-        answerB = '<label class="inline-flex items-center px-4 py-2 font-bold text-orange-800" id="answerB">' + '<input type="radio" class="' + i + '" name="answer' + i + '" value="b" onClick="clicked(this.value, this.className)">' + '</input>' + '<span class="ml-2 px-4 py-2 text-orange-800 ">' + randArr[i].answer.b + '</span>' + '</label>';
+        answerB = '<label class="inline-flex items-center px-4 py-2 font-bold text-orange-800 w-1/4" id="answerB">' + '<input type="radio" class="' + i + '" name="answer' + i + '" value="b" onClick="clicked(this.value, this.className)">' + '</input>' + '<span class="ml-2 px-4 py-2 text-orange-800 ">' + randArr[i].answer.b + '</span>' + '</label>';
 
-        answerC = '<label class="inline-flex items-center px-4 py-2 font-bold text-orange-800"id="answerC">' + '<input type="radio" class="' + i + '" name="answer' + i + '" value="c" onClick="clicked(this.value, this.className)">' + '</input>' + '<span class="ml-2 px-4 py-2 text-orange-800 ">' + randArr[i].answer.c + '</span>' + '</label>';
+        answerC = '<label class="inline-flex items-center px-4 py-2 font-bold text-orange-800 w-1/4"id="answerC">' + '<input type="radio" class="' + i + '" name="answer' + i + '" value="c" onClick="clicked(this.value, this.className)">' + '</input>' + '<span class="ml-2 px-4 py-2 text-orange-800 ">' + randArr[i].answer.c + '</span>' + '</label>';
 
-        answerD = '<label class="inline-flex items-center px-4 py-2 font-bold text-orange-800" id="answerD">' + '<input type="radio" class="' + i + '" name="answer' + i + '" value="d" onClick="clicked(this.value, this.className)">' + '</input>' + '<span class="ml-2 px-4 py-2 text-orange-800 ">' + randArr[i].answer.d + '</span>' + '</label>';
+        answerD = '<label class="inline-flex items-center px-4 py-2 font-bold text-orange-800 w-1/4" id="answerD">' + '<input type="radio" class="' + i + '" name="answer' + i + '" value="d" onClick="clicked(this.value, this.className)">' + '</input>' + '<span class="ml-2 px-4 py-2 text-orange-800 ">' + randArr[i].answer.d + '</span>' + '</label>';
 
         questionContainer.append(question, answerA, answerB, answerC, answerD);
         $("#triviaAll").append(questionContainer);
@@ -252,11 +260,11 @@ function timerStart(){
 
 //timer decrement
 function decrement(){
-    time--;
-    $("#sec").text(time);
     if (time === 0) {
         endTrivia();
     }
+    $("#sec").text(time);
+    time--;
 }
 
 //game over
@@ -266,7 +274,7 @@ function endTrivia(){
     $("#triviaAll").hide();
     $("#reset").show();
     $("#outOfTime").show();
-    $("label").remove();
+    $(".questionContainer").remove();
 
     $("#correctAns").show().text("Correct: " + correct);
     $("#incorrectAns").show().text("Incorrect: " + incorrect);
@@ -276,7 +284,6 @@ function endTrivia(){
     results();
     clearInterval(intervalId);
     timerRunning = false;
-    time = 1;
 }
 
 function clicked(currentAns, qIndex){
@@ -330,7 +337,6 @@ function reset(){
     answer =0;
     intervalId = 0;
     timerRunning = false;
-    time = 1;
     unanswered = 0;
     answers = { };
     randArr = [ ];
