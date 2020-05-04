@@ -2,7 +2,7 @@
 
 Cat trivia game
 
-[Link to page](https://github.com/reekamaharaj/TriviaGame)
+[Link to page](https://reekamaharaj.github.io/TriviaGame/)
 
 ## Description
 App that will ask 5 trivia questions about cats. The user has 25 seconds to answer to answer as many questions as they can. 
